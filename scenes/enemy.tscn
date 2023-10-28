@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://dh5hqds1qpdje"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_4a76a"]
+[ext_resource type="Texture2D" uid="uid://dbiyq0du5ei1b" path="res://art/enemyFlyingAlt_1.png" id="1_4ikiy"]
+[ext_resource type="Texture2D" uid="uid://bx1v8bnkj8g8j" path="res://art/enemyFlyingAlt_2.png" id="2_2n4mk"]
+[ext_resource type="Texture2D" uid="uid://dsm0mnf6fmtgx" path="res://art/enemyWalking_1.png" id="3_t54ng"]
+[ext_resource type="Texture2D" uid="uid://c4l4dd7ls173t" path="res://art/enemyWalking_2.png" id="4_tkg05"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_80usc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4ikiy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2n4mk")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_t54ng")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_tkg05")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i72gp"]
+
+[node name="Enemy" type="RigidBody2D"]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_4a76a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_80usc")
+animation = &"fly"
+speed_scale = 0.75
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_i72gp")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
